@@ -11,7 +11,7 @@ namespace MultiDungeon.EditorTools
     /// 처음 프로젝트를 열면 Title 씬을 자동으로 만들고 빌드 설정 첫 번째 씬으로 등록한다.
     /// </summary>
     [InitializeOnLoad]
-    static class TitleSceneCreator
+    public static class TitleSceneCreator
     {
         const string ScenePath = "Assets/Scenes/Title.unity";
 
@@ -25,7 +25,7 @@ namespace MultiDungeon.EditorTools
         }
 
         [MenuItem("멀티던전/타이틀 씬 다시 만들기")]
-        static void Create()
+        public static void Create()
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 return;
