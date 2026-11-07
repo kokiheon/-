@@ -54,6 +54,9 @@ namespace MultiDungeon.WorldMap
         public static readonly List<Expedition> Current = new List<Expedition>();
         public static int CompletedCount { get; private set; }
 
+        /// <summary>지도에서 '원정 출발'로 고른, 지금 진행 중인 원정. 없으면 null.</summary>
+        public static Expedition Active;
+
         public static void EnsureGenerated()
         {
             if (Current.Count == 0) Regenerate();
@@ -84,6 +87,7 @@ namespace MultiDungeon.WorldMap
         public static void CompleteExpedition()
         {
             CompletedCount++;
+            Active = null;
             Regenerate();
         }
 

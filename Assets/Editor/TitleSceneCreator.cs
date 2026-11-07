@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using MultiDungeon.Dungeon;
 using MultiDungeon.Title;
 using MultiDungeon.WorldMap;
 using UnityEditor;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace MultiDungeon.EditorTools
 {
     /// <summary>
-    /// 처음 프로젝트를 열면 Title, WorldMap 씬을 자동으로 만들고 빌드 설정에 등록한다.
+    /// 처음 프로젝트를 열면 Title, WorldMap, Dungeon 씬을 자동으로 만들고 빌드 설정에 등록한다.
     /// 배치모드: -executeMethod MultiDungeon.EditorTools.TitleSceneCreator.Create
     /// </summary>
     [InitializeOnLoad]
@@ -17,12 +18,14 @@ namespace MultiDungeon.EditorTools
     {
         public const string TitlePath = "Assets/Scenes/Title.unity";
         public const string WorldMapPath = "Assets/Scenes/WorldMap.unity";
+        public const string DungeonPath = "Assets/Scenes/Dungeon.unity";
 
         static TitleSceneCreator()
         {
             EditorApplication.delayCall += () =>
             {
-                if ((!File.Exists(TitlePath) || !File.Exists(WorldMapPath)) && !EditorApplication.isPlayingOrWillChangePlaymode)
+                if ((!File.Exists(TitlePath) || !File.Exists(WorldMapPath) || !File.Exists(DungeonPath))
+                    && !EditorApplication.isPlayingOrWillChangePlaymode)
                     Create();
             };
         }
@@ -34,6 +37,7 @@ namespace MultiDungeon.EditorTools
                 return;
 
             Directory.CreateDirectory("Assets/Scenes");
+            CreateScene(DungeonPath, "DungeonGame", typeof(DungeonGame));
             CreateScene(WorldMapPath, "WorldMapScreen", typeof(WorldMapScreen));
             CreateScene(TitlePath, "TitleScreen", typeof(TitleScreen));
 
@@ -41,8 +45,9 @@ namespace MultiDungeon.EditorTools
             {
                 new EditorBuildSettingsScene(TitlePath, true),
                 new EditorBuildSettingsScene(WorldMapPath, true),
+                new EditorBuildSettingsScene(DungeonPath, true),
             };
-            Debug.Log("[멀티던전] Title, WorldMap 씬을 만들었습니다.");
+            Debug.Log("[멀티던전] Title, WorldMap, Dungeon 씬을 만들었습니다.");
         }
 
         static void CreateScene(string path, string objectName, System.Type screenType)

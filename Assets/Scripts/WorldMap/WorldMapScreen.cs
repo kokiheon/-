@@ -216,8 +216,8 @@ namespace MultiDungeon.WorldMap
         void Depart()
         {
             if (selectedExpedition == null) return;
-            status.text = $"'{selectedRegion.Name} {selectedExpedition.Title}' 원정 준비 완료. " +
-                          "던전 탐험은 다음 단계에서 연결됩니다. '원정 완료 (테스트)'로 목록 갱신을 확인할 수 있어요.";
+            ExpeditionBoard.Active = selectedExpedition;
+            SceneManager.LoadScene(Dungeon.DungeonGame.SceneName);
         }
 
         void CompleteTest()
