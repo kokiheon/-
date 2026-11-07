@@ -15,7 +15,7 @@ namespace MultiDungeon.EditorTools
         {
             var options = new BuildPlayerOptions
             {
-                scenes = new[] { "Assets/Scenes/Title.unity" },
+                scenes = new[] { TitleSceneCreator.TitlePath, TitleSceneCreator.WorldMapPath },
                 locationPathName = "Builds/Windows/MultiDungeon.exe",
                 target = BuildTarget.StandaloneWindows64,
                 options = BuildOptions.None
