@@ -66,3 +66,23 @@ dungeon.free,자유 탐험 (선택한 원정 없음),Free exploration (no expedi
 dungeon.header,{0} · {1}    목표: {2},{0} · {1}    Goal: {2}
 dungeon.help,이동: WASD / 방향키    출구(초록 칸)를 찾아라    ESC: 원정 포기 (지도로),Move: WASD / Arrows    Find the exit (green tile)    ESC: Abandon (back to map)
 dungeon.cleared,원정 완료! 지도로 돌아갑니다...,Expedition complete! Returning to the map...
+dungeon.inventory,인벤토리,Inventory
+dungeon.minimap,지도,Map
+dungeon.light,빛 {0},Light {0}
+dungeon.room.entrance,입구,Entrance
+dungeon.room.exit,출구,Exit
+dungeon.room.battle,전투방,Battle Room
+dungeon.room.treasure,보물방,Treasure Room
+dungeon.room.empty,빈 방,Empty Room
+dungeon.room.title,방 {0} · {1},Room {0} · {1}
+dungeon.corridor,복도 ({0}/{1}),Corridor ({0}/{1})
+dungeon.prompt.room,미니맵에서 이웃한 방을 눌러 이동하세요,Click an adjacent room on the map to move
+dungeon.prompt.corridor,A/D 또는 ←/→ 로 복도를 걸으세요,Walk the corridor with A/D or ←/→
+dungeon.finish,원정 완료,Finish Expedition
+dungeon.hero_info,스킬과 장비는 다음 단계에서 추가됩니다,Skills and gear come in the next step
+dungeon.esc,ESC: 원정 포기,ESC: Abandon
+hero.lantern,종지기,Lamplighter
+hero.chain,쇠사슬 집행자,Chain Warden
+hero.bone,뼈마디 점술사,Bone Seer
+hero.plague,역병 약사,Plague Apothecary
+hero.rank,{0}열,Rank {0}

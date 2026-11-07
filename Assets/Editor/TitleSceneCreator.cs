@@ -63,6 +63,7 @@ namespace MultiDungeon.EditorTools
             // UI를 씬에 실제 오브젝트로 배치해 저장한다 (Hierarchy에서 보고 고칠 수 있음).
             if (screen is TitleScreen title) { Ui.EnsureEventSystem(); title.BuildLayout(); }
             if (screen is WorldMapScreen worldMap) { Ui.EnsureEventSystem(); worldMap.BuildLayout(); }
+            if (screen is DungeonGame dungeon) { Ui.EnsureEventSystem(); dungeon.BuildLayout(); }
             EditorSceneManager.SaveScene(scene, path);
         }
     }
