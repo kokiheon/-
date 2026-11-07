@@ -1,7 +1,7 @@
 using System.IO;
-using System.Linq;
 using MultiDungeon.Dungeon;
 using MultiDungeon.Title;
+using MultiDungeon.UI;
 using MultiDungeon.WorldMap;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -59,7 +59,10 @@ namespace MultiDungeon.EditorTools
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = Color.black;
             cam.orthographic = true;
-            new GameObject(objectName, screenType);
+            var screen = new GameObject(objectName).AddComponent(screenType);
+            // UI를 씬에 실제 오브젝트로 배치해 저장한다 (Hierarchy에서 보고 고칠 수 있음).
+            if (screen is TitleScreen title) { Ui.EnsureEventSystem(); title.BuildLayout(); }
+            if (screen is WorldMapScreen worldMap) { Ui.EnsureEventSystem(); worldMap.BuildLayout(); }
             EditorSceneManager.SaveScene(scene, path);
         }
     }

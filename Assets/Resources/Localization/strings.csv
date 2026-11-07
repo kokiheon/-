@@ -1,0 +1,68 @@
+key,ko,en
+title.name,멀티 던전,Multi Dungeon
+title.subtitle,지하왕국 원정,Expeditions into the Underkingdom
+title.start,게임 시작,Start Game
+title.multi,멀티플레이 (준비 중),Multiplayer (Coming Soon)
+title.settings,설정,Settings
+title.quit,종료,Quit
+title.back,뒤로,Back
+title.multi_status,멀티플레이는 개인 플레이 버전 이후에 추가됩니다.,Multiplayer will be added after the single-player version.
+title.version,v{0} 프로토타입,v{0} Prototype
+settings.volume,전체 볼륨: {0}%,Master Volume: {0}%
+settings.fullscreen,전체 화면: {0},Fullscreen: {0}
+settings.on,켬,On
+settings.off,끔,Off
+settings.language,언어: {0},Language: {0}
+language.name,한국어,English
+map.layer.surface,지상,Surface
+map.layer.upper,상층,Upper Depths
+map.layer.middle,중층,Middle Depths
+map.layer.lower,하부,Lower Depths
+map.layer.deep,심층,Deep
+map.layer.abyss,최하층,Abyss
+map.village,관문 마을 (거점),Gate Village (Base)
+map.party,내 파티,My Party
+map.empty_slot,빈 칸,Empty
+map.depart,원정 출발,Embark
+map.complete_test,원정 완료 (테스트),Complete (Test)
+map.back_title,타이틀로,Title
+map.available,가능한 원정 {0}  (원정이 끝나면 갱신),Expeditions: {0}  (redrawn after each expedition)
+map.region_info,{0} · 적: {1},{0} · Enemies: {1}
+map.goal,목표: {0},Goal: {0}
+map.reward_header,보상 (원정 등급이 정함),Rewards (set by expedition tier)
+map.reward,골드 {0} · 유물 확률 {1}%,Gold {0} · Trinket chance {1}%
+map.completed,완료한 원정: {0},Expeditions completed: {0}
+map.regenerated,원정을 마쳐 지도 전체의 원정 목록이 새로 뽑혔습니다.,Expedition finished. Every expedition on the map was redrawn.
+tier.0,초급,Novice
+tier.1,베테랑,Veteran
+tier.2,챔피언,Champion
+length.0,짧음,Short
+length.1,중간,Medium
+length.2,김,Long
+length.badge.0,짧,S
+length.badge.1,중,M
+length.badge.2,김,L
+region.roots.name,뿌리 묘지,Root Cemetery
+region.roots.enemies,언데드 · 무덤지기,Undead · Gravekeepers
+region.crystal.name,울림 수정 광맥,Echoing Crystal Vein
+region.crystal.enemies,수정 골렘 · 광부의 유령,Crystal Golems · Miner Ghosts
+region.capital.name,침수된 왕도,Drowned Capital
+region.capital.enemies,익사자 · 수중 괴물,Drowned · Lake Horrors
+region.spore.name,포자 숲,Spore Forest
+region.spore.enemies,버섯 인간 · 기생 생물,Fungal Folk · Parasites
+region.forge.name,용암 대장간,Magma Forge
+region.forge.enemies,대장장이 골렘 · 불꽃 정령,Smith Golems · Flame Spirits
+region.crypt.name,왕가의 납골궁,Royal Ossuary
+region.crypt.enemies,저주받은 근위대 · 망령,Cursed Guards · Wraiths
+region.throne.name,심연의 옥좌,Abyssal Throne
+region.throne.enemies,심연의 권속,Abyssal Kin
+goal.boss,보스 처치,Slay the boss
+goal.relic,유물 회수,Recover the relic
+goal.clear,전투방 모두 정리,Clear every battle room
+goal.rescue,생존자 구출,Rescue the survivors
+goal.explore,탐험 90%,Explore 90%
+goal.boss2,보스 2체 처치,Slay two bosses
+dungeon.free,자유 탐험 (선택한 원정 없음),Free exploration (no expedition)
+dungeon.header,{0} · {1}    목표: {2},{0} · {1}    Goal: {2}
+dungeon.help,이동: WASD / 방향키    출구(초록 칸)를 찾아라    ESC: 원정 포기 (지도로),Move: WASD / Arrows    Find the exit (green tile)    ESC: Abandon (back to map)
+dungeon.cleared,원정 완료! 지도로 돌아갑니다...,Expedition complete! Returning to the map...

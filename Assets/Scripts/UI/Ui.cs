@@ -1,3 +1,4 @@
+using MultiDungeon.Localization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -25,6 +26,11 @@ namespace MultiDungeon.UI
         {
             get
             {
+#if UNITY_EDITOR
+                // 에디터에서 씬에 저장할 때는 에셋 스프라이트를 써야 씬에 남는다.
+                if (!Application.isPlaying)
+                    return UnityEditor.AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+#endif
                 if (circle != null) return circle;
                 const int size = 128;
                 var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
@@ -93,20 +99,47 @@ namespace MultiDungeon.UI
             return t;
         }
 
-        /// <summary>배경 이미지 + 글자로 된 버튼. 글자 컴포넌트를 돌려준다.</summary>
-        public static Text Button(Transform parent, string label, int fontSize, UnityAction onClick, out Button button)
+        /// <summary>언어 키로 글자를 정하는 Text. 언어가 바뀌면 자동으로 갱신된다.</summary>
+        public static Text LText(Transform parent, string name, string key, int size, Color color,
+            FontStyle style = FontStyle.Normal, TextAnchor align = TextAnchor.MiddleCenter)
         {
-            var img = Image(parent, "Button_" + label, ButtonBg);
+            var t = Text(parent, name, Loc.Get(key), size, color, style, align);
+            t.gameObject.AddComponent<LocalizedText>().Key = key;
+            return t;
+        }
+
+        /// <summary>배경 이미지 + 글자로 된 버튼. key가 비어 있지 않으면 언어 키로 글자를 정한다.</summary>
+        public static Text Button(Transform parent, string key, int fontSize, UnityAction onClick, out Button button)
+        {
+            var img = Image(parent, "Button_" + (string.IsNullOrEmpty(key) ? "Row" : key), ButtonBg);
             button = img.gameObject.AddComponent<Button>();
             var colors = button.colors;
             colors.highlightedColor = new Color(1.6f, 1.3f, 1f);
             colors.pressedColor = new Color(0.7f, 0.6f, 0.5f);
             colors.disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.6f);
             button.colors = colors;
-            if (onClick != null) button.onClick.AddListener(onClick);
-            var text = Text(img.transform, "Label", label, fontSize, Gold);
+            Bind(button, onClick);
+            var text = string.IsNullOrEmpty(key)
+                ? Text(img.transform, "Label", "", fontSize, Gold)
+                : LText(img.transform, "Label", key, fontSize, Gold);
             Stretch(text.rectTransform);
             return text;
+        }
+
+        /// <summary>
+        /// 버튼에 동작을 연결한다. 에디터에서 씬을 만들 때는 인스펙터의 OnClick에 보이는 영구 연결로 저장한다.
+        /// </summary>
+        public static void Bind(Button button, UnityAction onClick)
+        {
+            if (onClick == null) return;
+#if UNITY_EDITOR
+            if (!Application.isPlaying && onClick.Target is Object)
+            {
+                UnityEditor.Events.UnityEventTools.AddPersistentListener(button.onClick, onClick);
+                return;
+            }
+#endif
+            button.onClick.AddListener(onClick);
         }
 
         public static void Place(RectTransform rt, Vector2 anchor, Vector2 pos, Vector2 size)

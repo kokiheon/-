@@ -1,3 +1,4 @@
+using MultiDungeon.Localization;
 using MultiDungeon.WorldMap;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -174,7 +175,7 @@ namespace MultiDungeon.Dungeon
                 cleared = true;
                 returnTimer = ReturnDelay;
                 ExpeditionBoard.CompleteExpedition();
-                messageText.text = "원정 완료! 지도로 돌아갑니다...";
+                messageText.text = Loc.Get("dungeon.cleared");
             }
         }
 
@@ -208,11 +209,11 @@ namespace MultiDungeon.Dungeon
 
             var exp = ExpeditionBoard.Active;
             string header = exp != null
-                ? $"{exp.Region.Name} · {exp.Title}    목표: {exp.Goal}"
-                : "자유 탐험 (선택한 원정 없음)";
+                ? Loc.Format("dungeon.header", exp.Region.Name, exp.Title, exp.Goal)
+                : Loc.Get("dungeon.free");
             CreateText(canvasGo.transform, font, header, 40, TextAnchor.UpperCenter,
                 new Vector2(0.5f, 1f), new Vector2(0, -30));
-            CreateText(canvasGo.transform, font, "이동: WASD / 방향키    출구(초록 칸)를 찾아라    ESC: 원정 포기 (지도로)",
+            CreateText(canvasGo.transform, font, Loc.Get("dungeon.help"),
                 26, TextAnchor.LowerLeft, new Vector2(0f, 0f), new Vector2(30, 30));
             messageText = CreateText(canvasGo.transform, font, "", 56, TextAnchor.MiddleCenter,
                 new Vector2(0.5f, 0.5f), new Vector2(0, 200));

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MultiDungeon.Localization;
 using UnityEngine;
 
 namespace MultiDungeon.WorldMap
@@ -9,9 +10,10 @@ namespace MultiDungeon.WorldMap
     public class Region
     {
         public string Id;
-        public string Name;
-        public string Layer;
-        public string Enemies;
+        public string LayerKey;
+        public string Name => Loc.Get($"region.{Id}.name");
+        public string Enemies => Loc.Get($"region.{Id}.enemies");
+        public string Layer => Loc.Get(LayerKey);
         public Vector2 MapPos;   // 지도 영역(1280x900) 안의 좌표, 왼쪽 아래 기준
         public Color Color;
     }
@@ -21,10 +23,12 @@ namespace MultiDungeon.WorldMap
         public Region Region;
         public Tier Tier;
         public Length Length;
-        public string Goal;
+        public string GoalKey;
+        public string Goal => Loc.Get(GoalKey);
 
-        public static string TierName(Tier t) => t == Tier.Novice ? "초급" : t == Tier.Veteran ? "베테랑" : "챔피언";
-        public static string LengthName(Length l) => l == Length.Short ? "짧음" : l == Length.Medium ? "중간" : "김";
+        public static string TierName(Tier t) => Loc.Get("tier." + (int)t);
+        public static string LengthName(Length l) => Loc.Get("length." + (int)l);
+        public static string LengthBadge(Length l) => Loc.Get("length.badge." + (int)l);
         public static Color TierColor(Tier t) => t == Tier.Novice ? new Color(0.45f, 0.7f, 0.4f)
             : t == Tier.Veteran ? new Color(0.9f, 0.65f, 0.25f) : new Color(0.85f, 0.3f, 0.28f);
         public string Title => $"{TierName(Tier)} · {LengthName(Length)}";
@@ -38,18 +42,18 @@ namespace MultiDungeon.WorldMap
     {
         public static readonly List<Region> Regions = new List<Region>
         {
-            new Region { Id = "roots", Name = "뿌리 묘지", Layer = "상층", Enemies = "언데드 · 무덤지기", MapPos = new Vector2(330, 690), Color = new Color(0.45f, 0.55f, 0.4f) },
-            new Region { Id = "crystal", Name = "울림 수정 광맥", Layer = "상층", Enemies = "수정 골렘 · 광부의 유령", MapPos = new Vector2(930, 690), Color = new Color(0.45f, 0.6f, 0.8f) },
-            new Region { Id = "capital", Name = "침수된 왕도", Layer = "중층", Enemies = "익사자 · 수중 괴물", MapPos = new Vector2(400, 520), Color = new Color(0.3f, 0.5f, 0.6f) },
-            new Region { Id = "spore", Name = "포자 숲", Layer = "중층", Enemies = "버섯 인간 · 기생 생물", MapPos = new Vector2(950, 520), Color = new Color(0.6f, 0.5f, 0.7f) },
-            new Region { Id = "forge", Name = "용암 대장간", Layer = "하부", Enemies = "대장장이 골렘 · 불꽃 정령", MapPos = new Vector2(650, 365), Color = new Color(0.8f, 0.4f, 0.25f) },
-            new Region { Id = "crypt", Name = "왕가의 납골궁", Layer = "심층", Enemies = "저주받은 근위대 · 망령", MapPos = new Vector2(400, 220), Color = new Color(0.55f, 0.5f, 0.35f) },
-            new Region { Id = "throne", Name = "심연의 옥좌", Layer = "최하층", Enemies = "심연의 권속", MapPos = new Vector2(880, 110), Color = new Color(0.5f, 0.25f, 0.4f) },
+            new Region { Id = "roots", LayerKey = "map.layer.upper", MapPos = new Vector2(330, 690), Color = new Color(0.45f, 0.55f, 0.4f) },
+            new Region { Id = "crystal", LayerKey = "map.layer.upper", MapPos = new Vector2(930, 690), Color = new Color(0.45f, 0.6f, 0.8f) },
+            new Region { Id = "capital", LayerKey = "map.layer.middle", MapPos = new Vector2(400, 520), Color = new Color(0.3f, 0.5f, 0.6f) },
+            new Region { Id = "spore", LayerKey = "map.layer.middle", MapPos = new Vector2(950, 520), Color = new Color(0.6f, 0.5f, 0.7f) },
+            new Region { Id = "forge", LayerKey = "map.layer.lower", MapPos = new Vector2(650, 365), Color = new Color(0.8f, 0.4f, 0.25f) },
+            new Region { Id = "crypt", LayerKey = "map.layer.deep", MapPos = new Vector2(400, 220), Color = new Color(0.55f, 0.5f, 0.35f) },
+            new Region { Id = "throne", LayerKey = "map.layer.abyss", MapPos = new Vector2(880, 110), Color = new Color(0.5f, 0.25f, 0.4f) },
         };
 
-        static readonly string[] ShortGoals = { "보스 처치", "유물 회수" };
-        static readonly string[] MediumGoals = { "전투방 모두 정리", "생존자 구출", "보스 처치" };
-        static readonly string[] LongGoals = { "탐험 90%", "전투방 모두 정리", "보스 2체 처치" };
+        static readonly string[] ShortGoals = { "goal.boss", "goal.relic" };
+        static readonly string[] MediumGoals = { "goal.clear", "goal.rescue", "goal.boss" };
+        static readonly string[] LongGoals = { "goal.explore", "goal.clear", "goal.boss2" };
 
         public static readonly List<Expedition> Current = new List<Expedition>();
         public static int CompletedCount { get; private set; }
@@ -77,7 +81,7 @@ namespace MultiDungeon.WorldMap
                         Region = region,
                         Tier = (Tier)Random.Range(0, 3),
                         Length = length,
-                        Goal = goals[Random.Range(0, goals.Length)],
+                        GoalKey = goals[Random.Range(0, goals.Length)],
                     });
                 }
             }
